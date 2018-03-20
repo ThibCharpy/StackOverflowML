@@ -5,5 +5,7 @@ package fr.upmc.stl.dar.projet
  *
  */
 object App {
-  println( "Hello World!" )
+  def main (arg: Array[String]): Unit = {
+    println( "Hello World!" )
+  }
 }
