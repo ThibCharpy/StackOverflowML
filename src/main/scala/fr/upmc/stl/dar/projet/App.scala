@@ -4,6 +4,6 @@ package fr.upmc.stl.dar.projet
  * Hello world!
  *
  */
-object App extends Application {
+object App {
   println( "Hello World!" )
 }
