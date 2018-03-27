@@ -3,20 +3,29 @@ import re
 from scrapy.selector import Selector
 
 
+def get_data_from_id(id):
+    return get_data_from_page("https://stackoverflow.com/questions/" + str(id))
+
+
 def get_data_from_page(url):
     req = urllib.request.Request(url, headers={'User-Agent': 'Mozilla/5.0'})
     html = str(urllib.request.urlopen(req).read())
 
     # print(html)
 
-    regex_title = '<div id="question-header">.+?<h1 itemprop="name"><a href="[^><]+?" class="question-hyperlink">(.*?)</a></h1>'
-    # regex_question = '<div class="post-text" itemprop="text">(.?*)</div>'
-    # regex_tags = '<div class="post-taglist">(.*?)</div>'
+    regex_title = "class=\"question-hyperlink\">([^><]*)"
+    regex_filtertitle = "[^><]+>(.*)"
+    # regex_question = "<div class=\"post-text\" itemprop=\"text\">(.?*)</div>"
+    # regex_tags = "<div class=\"post-taglist\">(.*?)</div>"
 
     match_title = re.search(regex_title, html)
+    test = re.search(regex_filtertitle, match_title.group())
+    print(test.group())
     # print(match_title)
     # match_question = re.search(regex_question, html)
     # match_tags = re.search(regex_tags, html)
+
+    print(match_title)
 
     if match_title:
         html_title = match_title.group(0)
@@ -35,4 +44,4 @@ def get_data_from_page(url):
     return html_title
 
 
-print("Le titre est : ", get_data_from_page("https://stackoverflow.com/questions/4"))
+print("Le titre est : ", get_data_from_id(4))
