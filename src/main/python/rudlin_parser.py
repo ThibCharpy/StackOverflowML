@@ -1,6 +1,5 @@
 import urllib.request
 import re
-from scrapy.selector import Selector
 
 
 def get_data_from_id(id):
@@ -45,3 +44,16 @@ def get_data_from_page(url):
 
 
 print("Le titre est : ", get_data_from_id(4))
+
+import csv
+
+# Return the ids must be use in the crawler
+def parse_csv (filename):
+    with open(filename,'rb') as f:
+        reader = csv.reader(f)
+        #Id, CreationDate, DeletionDate, ScoreOwnerUserId, AnswerCount
+        reader = filter(lambda row: row[2] == 'NA',reader)
+        idList = []
+        for row in reader:
+            idList.append(row[0])
+        return idList
