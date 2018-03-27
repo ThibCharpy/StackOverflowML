@@ -20,3 +20,4 @@ buildNumber.properties
 *.iws
 workspace.xml
 tasks.xml
+*.iml
